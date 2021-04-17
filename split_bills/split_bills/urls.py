@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from split_bills_app.views import HousesView, ResidentsView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('houses/', HousesView.as_view(), name='houses'),
+    path('residents/', ResidentsView.as_view(), name='residents'),
 ]

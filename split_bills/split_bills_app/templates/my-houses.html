@@ -1,0 +1,8 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Minhas casas</h1>
+{% for house in house_list %}
+  <li>{{ house.nick_name }}</li>
+{% endfor %}
+{% endblock %}

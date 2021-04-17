@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+from .models import House, Residents
+
+class HousesView(ListView):
+  model = House
+  template_name = 'my-houses.html'
+
+class ResidentsView(ListView):
+  model = Residents
+  template_name = 'residents.html'
