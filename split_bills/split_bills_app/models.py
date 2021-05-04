@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User
-import datetime 
 
 
 class BillType(models.Model):
@@ -15,8 +14,8 @@ class BillType(models.Model):
     name = models.CharField(blank=True, null=True, max_length=100, db_column='type')
 
     class Meta:
-        managed = False
         db_table = 'bill_type'
+        managed = True
     
     def __str__(self):
         return self.name
@@ -52,7 +51,6 @@ class Bills(models.Model):
     mime_type = models.CharField(blank=True, null=True, max_length=10)
 
     class Meta:
-        managed = False
         db_table = 'bills'
         verbose_name_plural = 'Bills'
     
@@ -71,7 +69,6 @@ class Residents(models.Model):
     dt_out = models.DateField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'residents'
         verbose_name_plural = 'Residents'
     
@@ -87,7 +84,6 @@ class Split(models.Model):
     cod_resident = models.ForeignKey(Residents, models.DO_NOTHING, db_column='cod_resident')
 
     class Meta:
-        managed = False
         db_table = 'split'
     
     def __str__(self):

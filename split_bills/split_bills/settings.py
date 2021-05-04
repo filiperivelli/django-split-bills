@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from os import path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,8 +84,12 @@ WSGI_APPLICATION = 'split_bills.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'dbSplitBills.db',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'splitbills',
+        'HOST': 'localhost',
+        'USER': 'postgres',
+        'PASSWORD': '123086',
+        'PORT':'5432',
     }
 }
 
@@ -128,3 +133,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'house-list'
+LOGIN_URL = 'login'
+
+django_heroku.settings(locals())

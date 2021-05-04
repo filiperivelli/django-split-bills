@@ -26,6 +26,6 @@ urlpatterns = [
     path('bills/<int:pk>/delete', views.BillsDeleteView.as_view(), name='bills-delete'),
 
     path('login/', views.LoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('register/', views.register, name='register'),
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('register/', views.RegisterPage.as_view(), name='register'),
 ]

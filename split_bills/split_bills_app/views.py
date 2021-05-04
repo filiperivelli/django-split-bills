@@ -1,43 +1,53 @@
-from django.views.generic import ListView, UpdateView, CreateView, DeleteView
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, UpdateView, CreateView, DeleteView, FormView
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 
 from .models import House, Residents, BillType, Bills, Split
 
-from .forms import CreateUserForm
-
 #Accounts Views
-def register(request):
-    form = CreateUserForm()
-    
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' +user)
-            return redirect('login')
+class RegisterPage(FormView):
+    template_name = 'accounts/register.html'
+    form_class = UserCreationForm
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('house-list')
 
-    context = {'form':form}
-    return render(request,'accounts/register.html', context)
+    def form_valid(self, form):
+        user = form.save()
+        if user is not None:
+            login(self.request, user)
+        return super(RegisterPage, self).form_valid(form)
   
+      
 class LoginView(LoginView):
     template_name = 'accounts/login.html'    
 
 #House Views
-class HouseListView(ListView):
+class HouseListView(LoginRequiredMixin, ListView):
     model = House
     template_name = 'house-list.html'
+    context_object_name = 'houses'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["houses"] = context["houses"].filter(user=self.request.user)
+        return context
+    
 
 class HouseCreateView(CreateView):
     model = House
     template_name = "create.html"
     fields = ['nick_name','adress']
     success_url = reverse_lazy('house-list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(HouseCreateView, self).form_valid(form)
+
 
 class HouseUpdateView(UpdateView):
     model = House
