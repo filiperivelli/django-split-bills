@@ -26,7 +26,10 @@ SECRET_KEY = '$)12c1ip+w@t8*_792ft@pmc$g95_2zrmlj$!52-xy-_z&&rwp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.20']
+ALLOWED_HOSTS = [
+    '192.168.0.20',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -123,3 +126,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = 'house-list'

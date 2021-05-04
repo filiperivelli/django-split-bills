@@ -1,5 +1,4 @@
 {% extends "base_generic.html" %}
-{% load bootstrap4 %}
 
 {% block content %}
 <div class="row">
@@ -8,10 +7,10 @@
             <div class="card-header bg-white border-0">
                 <div class="row align-items-center">
                     <div class="col-8">
-                        <h3 class="mb-0">List of Residents</h3>
+                        <h3 class="mb-0">List of Bill</h3>
                     </div>
                     <div class="col-4 text-right">
-                        <a href="{% url 'residents-create' %}" class="btn btn-sm btn-success">New</a>
+                        <a href="{% url 'bills-create' %}" class="btn btn-sm btn-success">New</a>
                     </div>
                 </div>
             </div>
@@ -20,19 +19,21 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">E-mail</th>  
+                        <th scope="col">House</th>
+                        <th scope="col">Type</th>
                         <th scope="col"></th>                     
                     </tr>
                 </thead>
                 <tbody>
-                    {% for resident in residents_list %}
+                    {% for bills in bills_list %}
                     <tr>
-                        <td>{{ resident.name }}</td>
-                        <td>{{ resident.email }}</td>
+                        <td>{{ bills }}</td>
+                        <td>{{ bills.cod_house }}</td>
+                        <td>{{ bills.cod_bill_type }}</td>
                         <td class="text-right">
-                            <div class="container">                               
-                                <a role='button' class="btn btn-primary" href="{% url 'residents-update' resident.cod_resident %}">Update</a>
-                                <a role='button' class="btn btn-danger" href="{% url 'residents-delete' resident.cod_resident %}">Delete</a>                                 
+                            <div class="container">
+                                <a role='button' class="btn btn-primary" href="{% url 'bills-update' bills.cod_bills %}">Update</a>
+                                <a role='button' class="btn btn-danger" href="{% url 'bills-delete' bills.cod_bills %}">Delete</a>
                             </div>                            
                         </td>
                     </tr>
