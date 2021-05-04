@@ -1,1 +1,1 @@
-web: gunicorn split_bills.wsgi
+web: gunicorn split.bills.split_bills.wsgi
