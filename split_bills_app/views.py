@@ -38,7 +38,7 @@ class HouseListView(LoginRequiredMixin, ListView):
         return context
     
 
-class HouseCreateView(CreateView):
+class HouseCreateView(LoginRequiredMixin, CreateView):
     model = House
     template_name = "create.html"
     fields = ['nick_name','adress']
@@ -49,7 +49,7 @@ class HouseCreateView(CreateView):
         return super(HouseCreateView, self).form_valid(form)
 
 
-class HouseUpdateView(UpdateView):
+class HouseUpdateView(LoginRequiredMixin, UpdateView):
     model = House
     template_name = "update.html"
     fields = ['nick_name', 'adress']
@@ -57,23 +57,23 @@ class HouseUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('house-list')
 
-class HouseDeleteView(DeleteView):
+class HouseDeleteView(LoginRequiredMixin, DeleteView):
     model = House
     template_name = "delete.html"
     success_url = reverse_lazy('house-list')
 
 #Residents Views
-class ResidentsListView(ListView):
+class ResidentsListView(LoginRequiredMixin, ListView):
     model = Residents
     template_name = 'residents-list.html'
 
-class ResidentsCreateView(CreateView):
+class ResidentsCreateView(LoginRequiredMixin, CreateView):
     model = Residents
     template_name = "create.html"
     fields = ('name','email','mobile','cod_house','dt_in','dt_out')
     success_url = reverse_lazy('residents-list')
 
-class ResidentsUpdateView(UpdateView):
+class ResidentsUpdateView(LoginRequiredMixin, UpdateView):
     model = Residents
     template_name = "update.html"
     fields = ('name','email','mobile','cod_house','dt_in','dt_out')
@@ -81,23 +81,23 @@ class ResidentsUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('residents-list')
 
-class ResidentsDeleteView(DeleteView):
+class ResidentsDeleteView(LoginRequiredMixin, DeleteView):
     model = Residents
     template_name = "delete.html"
     success_url = reverse_lazy('residents-list')
 
 #Bill Type Views
-class BillTypeListView(ListView):
+class BillTypeListView(LoginRequiredMixin, ListView):
     model = BillType
     template_name = "bill-type-list.html"
 
-class BillTypeCreateView(CreateView):
+class BillTypeCreateView(LoginRequiredMixin, CreateView):
     model = BillType
     template_name = "create.html"
     fields = ('name',)
     success_url = reverse_lazy('bill-type-list')
 
-class BillTypeUpdateView(UpdateView):
+class BillTypeUpdateView(LoginRequiredMixin, UpdateView):
     model = BillType
     template_name = "update.html"
     fields = ('name',)
@@ -105,30 +105,30 @@ class BillTypeUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('bill-type-list')
 
-class BillTypeDeleteView(DeleteView):
+class BillTypeDeleteView(LoginRequiredMixin, DeleteView):
     model = BillType
     template_name = "delete.html"
     success_url =reverse_lazy('bill-type-list')
 
 #Bills Views
-class BillsListView(ListView):
+class BillsListView(LoginRequiredMixin, ListView):
     model = Bills
     template_name = "bills-list.html"
 
-class BillsCreateView(CreateView):
+class BillsCreateView(LoginRequiredMixin, CreateView):
     model = Bills
     fields = '__all__'
     template_name = "create.html"
     success_url = reverse_lazy('bills-list')
 
-class BillsUpdateView(UpdateView):
+class BillsUpdateView(LoginRequiredMixin, UpdateView):
     model = Bills
     template_name = "update.html"
     fields = '__all__'
     def get_success_url(self):
         return reverse_lazy('bills-list')
 
-class BillsDeleteView(DeleteView):
+class BillsDeleteView(LoginRequiredMixin, DeleteView):
     model = Bills
     template_name = "delete.html"
     success_url = reverse_lazy('bills-list')
