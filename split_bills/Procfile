@@ -1,1 +1,0 @@
-web: gunicorn split_bills.split_bills.wsgi
