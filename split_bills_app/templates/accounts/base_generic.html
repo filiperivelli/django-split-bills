@@ -1,0 +1,15 @@
+<html>
+<head>
+    {# Load the tag library#}
+    {% load django_bootstrap5 %}
+
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+    <body class='text-center'>
+        {% block content %}{% endblock %}
+    </body>
+</html>
