@@ -38,7 +38,7 @@ class HouseListView(LoginRequiredMixin, ListView):
         return context
     
     def get_queryset(self):
-        return HouseListView.objects.filter(user=self.request.user)
+        return House.objects.filter(user=self.request.user)
     
 
 class HouseCreateView(LoginRequiredMixin, CreateView):
