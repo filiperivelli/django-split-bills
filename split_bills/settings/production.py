@@ -26,3 +26,5 @@ DATABASES = {
         'PORT':'5432',
     }
 }
+
+django_heroku.settings(locals())
