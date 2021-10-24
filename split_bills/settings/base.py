@@ -14,7 +14,7 @@ from pathlib import Path
 from os import path, environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = path.dirname(path.dirname(path.abspath(__file__)))
 
 SECRET_KEY = environ['SECRET_KEY']
 
@@ -95,12 +95,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = "/static/"
-
 LOGIN_REDIRECT_URL = 'house-list'
 LOGIN_URL = 'login'
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    path.join(BASE_DIR, 'static'),
+)
