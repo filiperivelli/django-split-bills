@@ -1,5 +1,3 @@
-import django_heroku
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -26,5 +24,3 @@ DATABASES = {
         'PORT':'5432',
     }
 }
-
-django_heroku.settings(locals())
