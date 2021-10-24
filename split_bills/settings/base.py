@@ -14,7 +14,7 @@ from pathlib import Path
 from os import path, environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = path.dirname(path.dirname(path.abspath(__file__)))
 
 SECRET_KEY = environ['SECRET_KEY']
 
