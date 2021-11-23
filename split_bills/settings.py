@@ -133,6 +133,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+STATICFILES_DIRS = [
+    path.join(BASE_DIR, "static"),
+]
+
 LOGIN_REDIRECT_URL = 'house-list'
 LOGIN_URL = 'login'
 
